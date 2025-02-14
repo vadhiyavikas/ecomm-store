@@ -1,10 +1,13 @@
-import { useNavigate } from "react-router";
-import { useAuth } from "../context/AuthContext";
+import { redirect, replace, useNavigate } from "react-router";
+import { getCookie } from "../cookie/cookies";
+import { useEffect } from "react";
 
 export default function ProtectedRoute({ children }) {
   let navigate = useNavigate();
-  const { user } = useAuth;
-  console.log(user, "user")
-  console.log(children, "children");
-  return user ? children : navigate("login");
+  const token = getCookie("token");
+  return token
+    ? children
+    : useEffect(() => {
+        navigate("/login");
+      }, []);
 }

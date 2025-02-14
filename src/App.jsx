@@ -1,6 +1,7 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router";
 import ProtectedRoute from "./utils/route/ProtectedRoute";
+import PageNotFound from "./pages/404Page";
 import DashboardPage from "./pages/Dashboard";
 import LoginPage from "./pages/Login";
 import ProfilePage from "./pages/Profile";
@@ -14,12 +15,20 @@ function App() {
         <Route
           path="/dashboard"
           element={
-            // <ProtectedRoute>
-            <DashboardPage />
-            // </ProtectedRoute>
+            <ProtectedRoute>
+              <DashboardPage />
+            </ProtectedRoute>
           }
         />
-        <Route path="/profile" element={<ProfilePage />} />
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute>
+              <ProfilePage />
+            </ProtectedRoute>
+          }
+        />
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
     </BrowserRouter>
   );
