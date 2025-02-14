@@ -1,7 +1,7 @@
 const Footer = () => {
   return (
-    <div className="fixed bottom-0 bg-amber-300 w-full">
-      <div className="container mx-auto">Footer</div>
+    <div className="fixed bottom-0 bg-orange-200 min-h-16 w-full">
+      <div className="container mx-auto"></div>
     </div>
   );
 };
