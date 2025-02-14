@@ -1,9 +1,12 @@
 import { useState } from "react";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { loggedInUser } from "../../utils/redux/Slice/usersSlice";
 import { setCookie } from "../../utils/cookie/cookies";
 import { useNavigate } from "react-router";
 
 const LoginPage = () => {
+  const dispatch = useDispatch();
   let navigate = useNavigate();
   const [formData, setFormData] = useState({ username: "", password: "" });
 
@@ -20,15 +23,14 @@ const LoginPage = () => {
       return;
     }
 
-    console.log("Login Data:", formData);
     // Here you can send the data to an API (e.g., via fetch or axios)
-
     const response = await axios.post("https://fakestoreapi.com/auth/login", {
       username: formData.username,
       password: formData.password,
     });
 
     if (response.status === 200) {
+      dispatch(loggedInUser(formData));
       setCookie("token", response.data.token);
       navigate("/dashboard");
     }
