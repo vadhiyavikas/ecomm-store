@@ -18,6 +18,7 @@ const ProfilePage = () => {
   };
 
   const { profile } = useSelector((state) => state.users);
+  console.log(profile, "profile")
 
   return (
     <AuthLayout>

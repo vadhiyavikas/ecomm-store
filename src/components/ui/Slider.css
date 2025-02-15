@@ -1,0 +1,18 @@
+.custom-slider {
+    max-width: 100%;
+    overflow: hidden;
+  }
+  
+  .slide-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .slide-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+  

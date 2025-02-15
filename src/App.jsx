@@ -7,6 +7,7 @@ import DashboardPage from "./pages/Dashboard";
 import LoginPage from "./pages/Login";
 import ProfilePage from "./pages/Profile";
 import CartPage from "./pages/cart";
+import Checkout from "./pages/Checkout";
 
 function App() {
   return (
@@ -35,6 +36,14 @@ function App() {
           element={
             <ProtectedRoute>
               <CartPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/checkout"
+          element={
+            <ProtectedRoute>
+              <Checkout />
             </ProtectedRoute>
           }
         />
