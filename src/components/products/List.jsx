@@ -1,14 +1,18 @@
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { userCart } from "../../utils/redux/Slice/usersSlice";
 const ProductList = ({ data }) => {
-  const notify = () => toast.success("Product Added Successfully!!", {
-    position: "top-center",
-  });
+  const dispatch = useDispatch();
+  const notify = () =>
+    toast.success("Product Added Successfully!!", {
+      position: "top-center",
+    });
   const handleCart = (item) => {
-    console.log(item, "item in cart");
+    dispatch(userCart({ ...item, quantity: 1 }));
     notify();
   };
   return (
-    <div className="py-5 grid grid-cols-3 gap-3">
+    <div className="py-5 grid lg:grid-cols-3 gap-3">
       {data.items &&
         data.items.map((d, index) => {
           return (
@@ -30,7 +34,7 @@ const ProductList = ({ data }) => {
                   {d.title}
                 </h3>
 
-                <p className="text-sm text-gray-500  truncate">
+                <p className="text-sm text-gray-500 truncate">
                   {d.description}
                 </p>
 
@@ -45,7 +49,7 @@ const ProductList = ({ data }) => {
 
                 <button
                   onClick={() => handleCart(d)}
-                  className="w-full bg-blue-600 text-white py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition"
+                  className="w-full cursor-pointer bg-blue-600 text-white py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition"
                 >
                   Add to Cart
                 </button>

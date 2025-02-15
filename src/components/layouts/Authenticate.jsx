@@ -4,7 +4,7 @@ const AuthLayout = ({ children }) => {
   return (
     <>
       <Navbar />
-      <div className="pt-16 container mx-auto">{children}</div>
+      <div className="pt-16 container mx-auto px-5">{children}</div>
       <Footer />
     </>
   );

@@ -74,7 +74,7 @@ const LoginPage = () => {
             type="submit"
             className="p-3 rounded-xl bg-blue-500 text-white cursor-pointer text-lg font-medium hover:bg-blue-600 transition"
           >
-            Submit
+            LogIn
           </button>
         </form>
       </div>

@@ -3,7 +3,8 @@ import { Cookies } from "react-cookie";
 const cookies = new Cookies();
 
 export const setCookie = (name, value, options = {}) => {
-  cookies.set(name, value, { path: "/", ...options });
+  const expires = new Date(Date.now() + 30 * 60 * 1000); // 10 minutes from now
+  cookies.set(name, value, { path: "/", expires, ...options });
 };
 
 export const getCookie = (name) => {
