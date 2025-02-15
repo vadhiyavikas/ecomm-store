@@ -1,10 +1,12 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router";
+import { ToastContainer, toast } from "react-toastify";
 import ProtectedRoute from "./utils/route/ProtectedRoute";
 import PageNotFound from "./pages/404Page";
 import DashboardPage from "./pages/Dashboard";
 import LoginPage from "./pages/Login";
 import ProfilePage from "./pages/Profile";
+import CartPage from "./pages/cart";
 
 function App() {
   return (
@@ -28,8 +30,17 @@ function App() {
             </ProtectedRoute>
           }
         />
+        <Route
+          path="/cart"
+          element={
+            <ProtectedRoute>
+              <CartPage />
+            </ProtectedRoute>
+          }
+        />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
+      <ToastContainer />
     </BrowserRouter>
   );
 }

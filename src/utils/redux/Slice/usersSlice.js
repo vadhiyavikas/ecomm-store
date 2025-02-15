@@ -6,6 +6,7 @@ const usersSlice = createSlice({
   reducers: {
     loggedInUser(state = initialState, action) {
       state = { ...state, profile: action.payload };
+      return state;
     },
   },
 });

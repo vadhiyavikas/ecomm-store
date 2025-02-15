@@ -28,9 +28,12 @@ const LoginPage = () => {
       username: formData.username,
       password: formData.password,
     });
+    const res = await axios.get("https://fakestoreapi.com/users/1");
+    if (res) {
+      dispatch(loggedInUser(res.data));
+    }
 
     if (response.status === 200) {
-      dispatch(loggedInUser(formData));
       setCookie("token", response.data.token);
       navigate("/dashboard");
     }
