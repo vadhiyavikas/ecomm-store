@@ -1,12 +1,13 @@
-import { useEffect } from "react";
+import { lazy, useEffect } from "react";
 import { useNavigate } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 
 /* Components */
 import AuthLayout from "../../components/layouts/Authenticate";
-import ProductList from "../../components/products/List";
+const ProductList = lazy(() => import("../../components/products/List"));
 import Slider from "../../components/ui/Slider";
+import Loader from "../../components/ui/Loader";
 
 /* Redux Actions */
 import {
@@ -100,9 +101,14 @@ const DashboardPage = () => {
   return (
     <AuthLayout>
       <div className="py-5">
-        <Slider slides={slides} options={sliderOptions} setCategory={fetchProductsByCategory} />
+        <Slider
+          slides={slides}
+          options={sliderOptions}
+          setCategory={fetchProductsByCategory}
+        />
       </div>
-      <ProductList data={items} />
+      {items.items && items.items.length > 0 && <ProductList data={items} />}
+      {items.items.length <= 0 && <Loader fullScreen />}
     </AuthLayout>
   );
 };
