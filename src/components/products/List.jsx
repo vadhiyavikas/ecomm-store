@@ -2,6 +2,7 @@ import { toast } from "react-toastify";
 import { FaShoppingCart } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { userCart } from "../../utils/redux/Slice/usersSlice";
+import Loader from "../ui/Loader";
 const ProductList = ({ data }) => {
   const dispatch = useDispatch();
   const notify = () =>
@@ -15,6 +16,7 @@ const ProductList = ({ data }) => {
   return (
     <div className="py-5 grid lg:grid-cols-3 gap-3">
       {data.items &&
+        data.items.length > 0 &&
         data.items.map((d, index) => {
           return (
             <div
@@ -52,7 +54,7 @@ const ProductList = ({ data }) => {
                   onClick={() => handleCart(d)}
                   className="w-full flex justify-center items-center gap-2 cursor-pointer bg-blue-600 text-white py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition"
                 >
-                  <FaShoppingCart size={17}/> Add to Cart
+                  <FaShoppingCart size={17} /> Add to Cart
                 </button>
               </div>
             </div>

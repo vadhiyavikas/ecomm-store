@@ -2,9 +2,12 @@ import React, { useState } from "react";
 import AuthLayout from "../../components/layouts/Authenticate";
 import { useSelector } from "react-redux";
 import { selectCartTotal } from "../../utils/redux/Slice/usersSlice";
+import { useNavigate } from "react-router";
 
 const Checkout = () => {
+  let navigate = useNavigate();
   const totalAmount = useSelector(selectCartTotal);
+  const cartItems = useSelector((state) => state.users.cart)
   const [selectedAddress, setSelectedAddress] = useState({
     geolocation: { lat: "-37.3159", long: "81.1496" },
     city: "Kilcoole",
@@ -34,7 +37,15 @@ const Checkout = () => {
   };
 
   const handleBuyNow = () => {
-    alert(`Order placed successfully with ${paymentMethod} payment!`);
+    const orderDetails = {
+      id: "ORD123456",
+      customerName: "John Doe",
+      email: "john@example.com",
+      total: totalAmount,
+      items: cartItems
+    };
+
+    navigate("/order-success", { state: { order: orderDetails } });
   };
 
   return (
