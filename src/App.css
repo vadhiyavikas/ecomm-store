@@ -1,5 +1,26 @@
 @import "tailwindcss";
 
+/* For Webkit browsers (Chrome, Edge, Safari) */
+::-webkit-scrollbar {
+  width: 8px; /* Width of the scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Track color */
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3b82f6; /* Scrollbar handle */
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3b82f6; /* Handle on hover */
+}
+
+
+
 /* #root {
   max-width: 1280px;
   margin: 0 auto;

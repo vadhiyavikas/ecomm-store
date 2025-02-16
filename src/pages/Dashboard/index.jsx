@@ -1,50 +1,106 @@
+import { useEffect } from "react";
+import { useNavigate } from "react-router";
+import { useSelector, useDispatch } from "react-redux";
+import axios from "axios";
+
+/* Components */
 import AuthLayout from "../../components/layouts/Authenticate";
 import ProductList from "../../components/products/List";
-import { useEffect } from "react";
-import axios from "axios";
 import Slider from "../../components/ui/Slider";
 
-/*redux*/
-import { useSelector, useDispatch } from "react-redux";
-import { setProducts } from "../../utils/redux/Slice/productsSlice";
+/* Redux Actions */
+import {
+  setProducts,
+  setElectronicsItems,
+  setJeweleryItems,
+  setMensClothsItems,
+  setWomensClothsItems,
+} from "../../utils/redux/Slice/productsSlice";
 
-/*images*/
+/* Images */
 import Electronics from "../../assets/Home-Appliances.jpg";
 import Jwellery from "../../assets/jwellery.jpg";
 import MenCloths from "../../assets/Mens-clothing.jpg";
 import WomanCloths from "../../assets/Woman-clothing.jpg";
 
 const DashboardPage = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const items = useSelector((state) => state.products);
 
-  const getProducts = async () => {
-    const response = await axios.get("https://fakestoreapi.com/products");
-    if (response.status === 200) {
-      dispatch(setProducts(response.data));
+  /* Fetch All Products */
+  useEffect(() => {
+    const fetchAllProducts = async () => {
+      try {
+        const { data } = await axios.get("https://fakestoreapi.com/products");
+        dispatch(setProducts(data));
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
+    };
+    fetchAllProducts();
+  }, [dispatch]);
+
+  /* Fetch Products by Category */
+  const fetchProductsByCategory = async (category) => {
+    try {
+      const { data, status } = await axios.get(
+        `https://fakestoreapi.com/products/category/${category}`
+      );
+
+      if (status === 200) {
+        switch (category) {
+          case "electronics":
+            dispatch(setElectronicsItems(data));
+            navigate("/category/electronics");
+            break;
+          case "jewelery":
+            dispatch(setJeweleryItems(data));
+            navigate("/category/jewelery");
+            break;
+          case "men's clothing":
+            dispatch(setMensClothsItems(data));
+            navigate("/category/mens-cloths");
+            break;
+          case "women's clothing":
+            dispatch(setWomensClothsItems(data));
+            navigate("/category/womens-cloths");
+            break;
+          default:
+            break;
+        }
+      }
+    } catch (error) {
+      console.error(`Error fetching ${category} products:`, error);
     }
   };
-  useEffect(() => {
-    getProducts();
-  }, []);
 
+  /* Slider Configuration */
   const slides = [
-    { image: Electronics, alt: "Image 1" },
-    { image: Jwellery, alt: "Image 2" },
-    { image: MenCloths, alt: "Image 3" },
-    { image: WomanCloths, alt: "Image 4" },
+    { image: Electronics, alt: "Electronics", type: "electronics" },
+    { image: Jwellery, alt: "Jewelery", type: "jewelery" },
+    { image: MenCloths, alt: "Men's Clothing", type: "men's clothing" },
+    { image: WomanCloths, alt: "Women's Clothing", type: "women's clothing" },
   ];
 
-  const options = {
+  const sliderOptions = {
     perPage: 4,
     autoPlay: true,
     arrows: false,
-    gap: "15px"
+    gap: "15px",
+    mediaQuery: "min",
+    breakpoints: {
+      640: {
+        perPage: 4,
+        arrows: false,
+      },
+    },
   };
+
   return (
     <AuthLayout>
       <div className="py-5">
-        <Slider slides={slides} options={options} />
+        <Slider slides={slides} options={sliderOptions} setCategory={fetchProductsByCategory} />
       </div>
       <ProductList data={items} />
     </AuthLayout>

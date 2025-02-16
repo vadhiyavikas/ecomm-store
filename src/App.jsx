@@ -8,6 +8,10 @@ import LoginPage from "./pages/Login";
 import ProfilePage from "./pages/Profile";
 import CartPage from "./pages/cart";
 import Checkout from "./pages/Checkout";
+import ElectronicsPage from "./pages/Electronics";
+import JeweleryPage from "./pages/Jewelery";
+import MensClothsPage from "./pages/MensCloths";
+import WomensClothsPage from "./pages/WomensCloths";
 
 function App() {
   return (
@@ -44,6 +48,38 @@ function App() {
           element={
             <ProtectedRoute>
               <Checkout />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/category/electronics"
+          element={
+            <ProtectedRoute>
+              <ElectronicsPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/category/jewelery"
+          element={
+            <ProtectedRoute>
+              <JeweleryPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/category/mens-cloths"
+          element={
+            <ProtectedRoute>
+              <MensClothsPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/category/womens-cloths"
+          element={
+            <ProtectedRoute>
+              <WomensClothsPage />
             </ProtectedRoute>
           }
         />
