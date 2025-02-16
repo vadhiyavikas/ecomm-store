@@ -1,4 +1,5 @@
 import { toast } from "react-toastify";
+import { FaShoppingCart } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { userCart } from "../../utils/redux/Slice/usersSlice";
 const ProductList = ({ data }) => {
@@ -49,9 +50,9 @@ const ProductList = ({ data }) => {
 
                 <button
                   onClick={() => handleCart(d)}
-                  className="w-full cursor-pointer bg-blue-600 text-white py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition"
+                  className="w-full flex justify-center items-center gap-2 cursor-pointer bg-blue-600 text-white py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition"
                 >
-                  Add to Cart
+                  <FaShoppingCart size={17}/> Add to Cart
                 </button>
               </div>
             </div>

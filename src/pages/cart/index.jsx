@@ -7,6 +7,9 @@ import {
   removeFromCart,
 } from "../../utils/redux/Slice/usersSlice";
 import CartTotal from "./TotalItems";
+
+/*assets*/
+import EmptyCart from "../../assets/Empty-cart.webp";
 const CartPage = () => {
   const dispatch = useDispatch();
   const items = useSelector((state) => state.users.cart);
@@ -69,6 +72,14 @@ const CartPage = () => {
               </div>
             );
           })}
+        {items.length <= 0 && (
+          <div className="min-h-screen flex justify-center items-center rounded-2xl shadow-2xl">
+            <div className="text-2xl font-bold text-center">
+              <img src={EmptyCart} alt="empty-cart" />
+              No items !!
+            </div>
+          </div>
+        )}
         <CartTotal />
       </div>
     </AuthLayout>
