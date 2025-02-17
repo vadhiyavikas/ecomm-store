@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   profile: null,
   cart: [], // Ensure cart is an empty array initially
+  orders: [], // Store past orders
 };
 
 const usersSlice = createSlice({
@@ -41,13 +42,30 @@ const usersSlice = createSlice({
     removeFromCart(state, action) {
       state.cart = state.cart.filter((item) => item.id !== action.payload.id);
     },
+
+    clearCart: (state) => {
+      state.cart = [];
+    },
+
+    addOrderHistory: (state, action) => {
+      state.orders.push(action.payload); // Save order details
+    },
   },
 });
 
 // ✅ Selector for total cart price
 export const selectCartTotal = (state) =>
-  state.users.cart.reduce((total, item) => total + item.price * item.quantity, 0);
+  state.users.cart.reduce(
+    (total, item) => total + item.price * item.quantity,
+    0
+  );
 
-export const { loggedInUser, userCart, updateCartQuantity, removeFromCart } =
-  usersSlice.actions;
+export const {
+  loggedInUser,
+  userCart,
+  updateCartQuantity,
+  removeFromCart,
+  clearCart,
+  addOrderHistory,
+} = usersSlice.actions;
 export default usersSlice.reducer;
