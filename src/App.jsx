@@ -10,18 +10,19 @@ import Loader from "./components/ui/Loader";
 /*lazy components*/
 const DashboardPage = lazy(() => import("./pages/Dashboard"));
 const ProfilePage = lazy(() => import("./pages/Profile"));
-const CartPage = lazy(() => import("./pages/cart"));
+const CartPage = lazy(() => import("./pages/Cart"));
 const Checkout = lazy(() => import("./pages/Checkout"));
 const ElectronicsPage = lazy(() => import("./pages/Electronics"));
 const JeweleryPage = lazy(() => import("./pages/Jewelery"));
 const MensClothsPage = lazy(() => import("./pages/MensCloths"));
 const WomensClothsPage = lazy(() => import("./pages/WomensCloths"));
 const OrderSuccess = lazy(() => import("./pages/Order"));
+const WishlistPage = lazy(() => import("./pages/Wishlist"));
 
 function App() {
   return (
     <BrowserRouter>
-      <Suspense fallback={<Loader fullScreen/>}>
+      <Suspense fallback={<Loader fullScreen />}>
         <Routes>
           <Route path="/" element={<LoginPage />} />
           <Route path="/login" element={<LoginPage />} />
@@ -94,6 +95,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <OrderSuccess />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/wishlist"
+            element={
+              <ProtectedRoute>
+                <WishlistPage />
               </ProtectedRoute>
             }
           />

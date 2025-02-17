@@ -4,6 +4,7 @@ const initialState = {
   profile: null,
   cart: [], // Ensure cart is an empty array initially
   orders: [], // Store past orders
+  wishlist: [], // ✅ New: Wishlist state
 };
 
 const usersSlice = createSlice({
@@ -50,6 +51,25 @@ const usersSlice = createSlice({
     addOrderHistory: (state, action) => {
       state.orders.push(action.payload); // Save order details
     },
+
+    // ✅ Add to Wishlist / Remove if already present
+    toggleWishlist(state, action) {
+      const product = action.payload;
+      const exists = state.wishlist.some((item) => item.id === product.id);
+
+      if (exists) {
+        state.wishlist = state.wishlist.filter(
+          (item) => item.id !== product.id
+        );
+      } else {
+        state.wishlist.push(product);
+      }
+    },
+
+    // ✅ Clear Wishlist (Optional)
+    clearWishlist(state) {
+      state.wishlist = [];
+    },
   },
 });
 
@@ -60,6 +80,10 @@ export const selectCartTotal = (state) =>
     0
   );
 
+export const selectWishlist = (state) => state.users.wishlist;
+export const isProductInWishlist = (state, productId) =>
+  state.users.wishlist.some((item) => item.id === productId);
+
 export const {
   loggedInUser,
   userCart,
@@ -67,5 +91,7 @@ export const {
   removeFromCart,
   clearCart,
   addOrderHistory,
+  toggleWishlist,
+  clearWishlist,
 } = usersSlice.actions;
 export default usersSlice.reducer;

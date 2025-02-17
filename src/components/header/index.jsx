@@ -1,6 +1,6 @@
 import { CgProfile } from "react-icons/cg";
 import { BsCart4 } from "react-icons/bs";
-import { FaShopify } from "react-icons/fa";
+import { FaShopify, FaHeart } from "react-icons/fa";
 import { Tooltip } from "react-tooltip";
 import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
@@ -19,7 +19,7 @@ const Navbar = () => {
             <FaShopify size={30} />
             EcommStore
           </div>
-          <div className="flex gap-3">
+          <div className="flex gap-3 items-center">
             <CgProfile
               size={30}
               className="cursor-pointer text-blue-500"
@@ -43,6 +43,14 @@ const Navbar = () => {
                 </span>
               )}
             </div>
+            <FaHeart
+              size={25}
+              className="text-blue-500"
+              onClick={() => navigate("/wishlist")}
+              data-tooltip-id="wishlist-tooltip"
+              data-tooltip-content="Wishlist"
+            />
+            <Tooltip id="wishlist-tooltip" />
           </div>
         </div>
       </div>
