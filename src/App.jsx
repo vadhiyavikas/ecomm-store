@@ -10,7 +10,7 @@ import Loader from "./components/ui/Loader";
 /*lazy components*/
 const DashboardPage = lazy(() => import("./pages/Dashboard"));
 const ProfilePage = lazy(() => import("./pages/Profile"));
-const CartPage = lazy(() => import("./pages/Cart"));
+const CartPage = lazy(() => import("./pages/cart"));
 const Checkout = lazy(() => import("./pages/Checkout"));
 const ElectronicsPage = lazy(() => import("./pages/Electronics"));
 const JeweleryPage = lazy(() => import("./pages/Jewelery"));
